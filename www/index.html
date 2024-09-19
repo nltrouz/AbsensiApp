@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Absensi App</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://absensi.rohbintang.my.id; script-src 'self' 'unsafe-inline'; connect-src *; img-src *; style-src 'self' 'unsafe-inline';">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <!-- Ensure Cordova script is included -->
+    <script type="text/javascript" src="cordova.js"></script>
+    
+    <script type="text/javascript">
+        document.addEventListener('deviceready', function() {
+            console.log("Cordova is ready.");
+
+            // Open URL in InAppBrowser
+            if (cordova.InAppBrowser) {
+                var ref = cordova.InAppBrowser.open('https://absensi.rohbintang.my.id/', '_self', 'location=yes');
+                ref.addEventListener('loadstart', function(event) { console.log('Loading started: ' + event.url); });
+                ref.addEventListener('loadstop', function(event) { console.log('Loading stopped: ' + event.url); });
+                ref.addEventListener('loaderror', function(event) { console.log('Loading error: ' + event.message); });
+                ref.addEventListener('exit', function(event) { console.log('InAppBrowser closed'); });
+            } else {
+                console.error("InAppBrowser plugin is not available.");
+            }
+        }, false);
+    </script>
+</body>
+</html>
